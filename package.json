@@ -27,10 +27,10 @@
         "host": "^10.10.0"
     },
     "scripts": {
-        "build": "directus-extension build",
-        "build:beta": "directus-extension build --no-minify",
-        "dev": "directus-extension build -w --no-minify",
-        "link": "directus-extension link",
+        "build": "node ./node_modules/@directus/extensions-sdk/cli.js build",
+        "build:beta": "node ./node_modules/@directus/extensions-sdk/cli.js build --no-minify",
+        "dev": "node ./node_modules/@directus/extensions-sdk/cli.js build -w --no-minify",
+        "link": "node ./node_modules/@directus/extensions-sdk/cli.js link",
         "release": "npx changelogen --release && npm publish && git push --follow-tags"
     },
     "devDependencies": {
@@ -40,7 +40,6 @@
         "vue": "^3.4.32"
     },
     "dependencies": {
-        "@directus/extension-sdk": "9.0.0-rc.91",
         "vue-i18n": "^9.13.1",
         "vue-router": "^4.4.0",
         "vuedraggable": "4.1.0"
