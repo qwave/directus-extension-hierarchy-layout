@@ -71,10 +71,12 @@ export default defineLayout({
         function useLayoutOptions() {
             const optParentField = createViewOption<number>('parentField', "parent");
             const optTitle = createViewOption<number>('title', "{{name}}");
+            const optAllowReorder = createViewOption<boolean>('allowReorder', true);
 
             return {
                 optParentField,
-                optTitle
+                optTitle,
+                optAllowReorder
             };
 
             function createViewOption<T>(key: keyof LayoutOptions, defaultValue: any) {
@@ -94,7 +96,8 @@ export default defineLayout({
 
         const {
             optParentField,
-            optTitle
+            optTitle,
+            optAllowReorder
         } = useLayoutOptions();
 
         const parentField = computed(() => {
@@ -107,7 +110,7 @@ export default defineLayout({
             });
         })
 
-        if (relationFields.value.length === 0) {
+        if (relationFields.value.length > 0 && !relationFields.value.some((field) => field.field === optParentField.value)) {
             optParentField.value = relationFields.value[0].field;
         }
 
@@ -153,6 +156,7 @@ export default defineLayout({
             parentField,
             optParentField,
             optTitle,
+            optAllowReorder,
             collection,
 
             selection,

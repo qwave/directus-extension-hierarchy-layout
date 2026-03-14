@@ -8,6 +8,7 @@
 				@delete="$emit('delete', $event)"
 				:optTitle="optTitle"
 				:optParentField="optParentField"
+				:allowReorder="optAllowReorder"
 				:collection="collection"
 				:parent="null"
 				:edit="onItemClick"
@@ -32,6 +33,7 @@ const props = defineProps<{
 	items: Item[];
 	optParentField: string,
 	optTitle: string,
+	optAllowReorder: boolean,
 	getLinkForItem: (item: Record<string, any>) => string | undefined;
 	onItemClick: (item: Record<string, any>) => string | undefined;
 

@@ -5,7 +5,8 @@
 		:class="children ? 'drag-container': 'root-drag-container'"
 		class="v-forrest-item"
 		item-key="id"
-		handle=".drag-handle"
+		:disabled="!allowReorder"
+		:handle="allowReorder ? '.drag-handle' : undefined"
 		:swap-threshold="0.3"
 		v-bind="{ 'force-fallback': true }"
 	>
@@ -19,6 +20,7 @@
 				:selection="selection"
 				:optTitle="optTitle"
 				:optParentField="optParentField"
+				:allowReorder="allowReorder"
 			>
 				<v-hierarchy-item
 					:items="element.sub_items"
@@ -33,6 +35,7 @@
 
 					:optTitle="optTitle"
 					:optParentField="optParentField"
+					:allowReorder="allowReorder"
 					:edit="edit"
 				/>
 			</v-hierarchy-wrap>
@@ -51,6 +54,7 @@ const props = defineProps<{
 	parent: number | undefined;
 	optTitle: string;
 	optParentField: string;
+	allowReorder: boolean;
 	collection: string;
 	selectMode: boolean;
 	selection: Array<number | string>;
@@ -67,6 +71,8 @@ const updateItems = (value) => {
 
 const itemsRender = computed({
 	set: (value) => {
+		if (!props.allowReorder) return;
+
 		value.forEach((item, index) => {
 			item.sort = index;
 		})

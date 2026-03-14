@@ -10,7 +10,7 @@
 		>
 			<v-list-item-icon>
 				<v-icon v-if="selectMode" :name="checkedIcon"></v-icon>
-				<v-icon v-else class="drag-handle" name="drag_handle"/>
+				<v-icon v-else-if="allowReorder" class="drag-handle" name="drag_handle"/>
 			</v-list-item-icon>
 
 			<div class="" style="flex-grow: 1">
@@ -52,6 +52,7 @@ const props = defineProps<{
 	optTitle: string;
 	collection: string;
 	hasChildren: boolean;
+	allowReorder: boolean;
 	selectMode: boolean;
 	selection: Array<number | string>;
 	edit: (item) => void;

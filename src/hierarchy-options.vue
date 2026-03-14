@@ -14,6 +14,9 @@
 		</div>
 		<v-collection-field-template v-model="optTitleWritable" :collection="collection" />
 	</div>
+	<div class="field">
+		<v-checkbox v-model="optAllowReorderWritable" label="Allow reorder" />
+	</div>
 </template>
 
 
@@ -29,16 +32,19 @@ const props = defineProps<{
 	parentField?: Field;
 	optParentField: string
 	optTitle: string,
+	optAllowReorder: boolean,
 	relationFields: Field[]
 }>();
 
 const emit = defineEmits<{
 	(e: 'update:optTitle', optTitle: string): void;
 	(e: 'update:optParentField', optParentField: string): void;
+	(e: 'update:optAllowReorder', optAllowReorder: boolean): void;
 }>();
 
 const optTitleWritable = useSync(props, 'optTitle', emit);
 const optParentFieldWritable = useSync(props, 'optParentField', emit);
+const optAllowReorderWritable = useSync(props, 'optAllowReorder', emit);
 </script>
 
 
